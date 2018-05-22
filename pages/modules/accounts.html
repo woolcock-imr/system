@@ -1,0 +1,46 @@
+<section>
+    VmInclude:__COMPONENT__/grid/grid.v3.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__COMPONENT__/grid/grid.v3.js
+		_json='';
+        //-------------------------------------
+        _fields="_Form,FirstName,Surname,Organisation,Email,AdditionalInfo,LoginName,_gridHidden|Password";
+        _fields+=",Submit Date|DateTime,Submitted by|Author,_Delete";
+        //-------------------------------------
+        _cell_render=function(records,I,field,td,set_value,source){
+            switch(field){
+                case 'LoginName':
+                    records[I].vm_readonly[field]=true;
+                    break;
+            }
+        }
+        //-------------------------------------
+        $('#D__ID').on('load',function(){  _set_req(); _request_data();  })
+        //-------------------------------------
+        _before_submit=function(record,dbv){
+            //-------------------------------------
+            dbv.S1=record.Email;
+            dbv.S2=record.LoginName;
+    		var pw=record.Password;
+    		if(pw!=''){
+    			dbv.ES3=pw;
+                record.Password='';
+    		}
+            return true;
+        };
+        //-------------------------------------
+        _set_req=function(){
+            _req={
+                cmd:'query_system_records',db_pid:_db_pid,'I':$('#I__ID').text(),page_size:$('#page_size__ID').val(),
+                s1:$('#keyword__ID').val(),
+            }
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__COMPONENT__/grid/grid.v3.css
+</style>

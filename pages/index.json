@@ -1,0 +1,6 @@
+{
+    "modules":
+	{
+        "accounts":       {"table_id":"10","url":"modules/accounts.html"}
+	}
+}
